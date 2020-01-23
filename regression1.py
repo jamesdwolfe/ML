@@ -38,7 +38,7 @@ X = preprocessing.scale(X) #convert every number to something between 0 and 1, n
 y=np.array(df['label'])
 #print(len(X),len(y))
 
-X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.6)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.8)
 clf = svm.SVR() #support vector machines, mcuh worse
 clf = LinearRegression()
 clf.fit(X_train, y_train)
