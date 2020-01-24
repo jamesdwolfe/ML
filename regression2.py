@@ -5,15 +5,16 @@ import math
 from sklearn import preprocessing, svm
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
-import yfinance as yf
 
 desired_width=1000
 pd.set_option('display.width',desired_width)
 np.set_printoptions(linewidth=desired_width)
 pd.set_option('display.max_columns',100)
 
-stock_name='VOO'
+import matplotlib.pyplot as plt
+import yfinance as yf
+
+stock_name='PINS'
 start_date = '2019-08-01'
 
 data=yf.download(stock_name,start_date)
@@ -46,7 +47,7 @@ print(data)
 print("Days in advance =", forecast_out)
 print("Accuracy percentage =", accuracy)
 
-clf.fit(X[:-1],y[:-1])
+clf.fit(X[:-forecast_out],y[:-forecast_out])
 y_new = clf.predict(X[-forecast_out:])
 print("Todays stock price for",stock_name,"=",data['Close'][-forecast_out])
 print("Tomorrows stock price for",stock_name,"=",y_new[0])
@@ -56,4 +57,6 @@ print("Percentage change =",percent_change)
 #################################################
 
 data.Close.plot()
+df.High.plot()
+df.Low.plot()
 plt.show()
