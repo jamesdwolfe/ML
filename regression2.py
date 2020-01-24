@@ -14,8 +14,8 @@ pd.set_option('display.max_columns',100)
 import matplotlib.pyplot as plt
 import yfinance as yf
 
-stock_name='VOO'
-start_date = '2019-01-01'
+stock_name='PINS'
+start_date = '2019-08-01'
 
 data=yf.download(stock_name,start_date)
 df = data[['Open','Close','High','Low','Volume']]
@@ -51,12 +51,12 @@ clf.fit(X[:-forecast_out],y[:-forecast_out])
 y_new = clf.predict(X[-forecast_out:])
 print("Todays stock price for",stock_name,"=",data['Close'][-forecast_out])
 print("Tomorrows stock price for",stock_name,"=",y_new[0])
-percent_change = (y_new[0]-data['Close'][-forecast_out])/data['Close'][-forecast_out]
+percent_change = (y_new[0]-data['Close'][-forecast_out])/data['Close'][-forecast_out]*100
 print("Percentage change =",percent_change)
-if percent_change>0:
-    print(stock_name,":",percent_change)
 
 #################################################
 
 data.Close.plot()
+df.High.plot()
+df.Low.plot()
 plt.show()
